@@ -216,27 +216,35 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Column(
-        children: [
-          const TabBar(
-            tabs: [
-              Tab(text: 'Weekly'),
-              Tab(text: 'Monthly'),
-              Tab(text: 'Yearly'),
-            ],
-          ),
-          Expanded(
-            child: TabBarView(
-              children: [
-                _buildWeekTab(),
-                _buildMonthTab(),
-                _buildYearTab(),
+    final theme = Theme.of(context);
+    return Scaffold(
+      backgroundColor: theme.colorScheme.surface,
+      appBar: AppBar(
+        title: const Text('Statistics'),
+        centerTitle: true,
+      ),
+      body: DefaultTabController(
+        length: 3,
+        child: Column(
+          children: [
+            const TabBar(
+              tabs: [
+                Tab(text: 'Weekly'),
+                Tab(text: 'Monthly'),
+                Tab(text: 'Yearly'),
               ],
             ),
-          ),
-        ],
+            Expanded(
+              child: TabBarView(
+                children: [
+                  _buildWeekTab(),
+                  _buildMonthTab(),
+                  _buildYearTab(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -471,12 +479,13 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
           barTouchData: BarTouchData(
             enabled: true,
             touchTooltipData: BarTouchTooltipData(
+              tooltipBgColor: colorScheme.surfaceContainerHigh,
               getTooltipItem: (group, groupIndex, rod, rodIndex) {
                 final day = weekData[group.x];
                 return BarTooltipItem(
                   '${_dayLabels[group.x]}\n${_currencyFormat.format(day.amount)}',
                   TextStyle(
-                    color: colorScheme.onInverseSurface,
+                    color: colorScheme.onSurface,
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                   ),
@@ -887,6 +896,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
           barTouchData: BarTouchData(
             enabled: true,
             touchTooltipData: BarTouchTooltipData(
+              tooltipBgColor: colorScheme.surfaceContainerHigh,
               getTooltipItem: (group, groupIndex, rod, rodIndex) {
                 final m = breakdown[group.x];
                 final label = rodIndex == 0 ? 'Expense' : 'Income';
@@ -894,7 +904,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
                 return BarTooltipItem(
                   '${_monthNames[m.month - 1]} $label\n${_currencyFormat.format(amount)}',
                   TextStyle(
-                    color: colorScheme.onInverseSurface,
+                    color: colorScheme.onSurface,
                     fontSize: 11,
                     fontWeight: FontWeight.w500,
                   ),

@@ -29,6 +29,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   int _currentIndex = 0;
+  final _recurringKey = GlobalKey<RecurringScreenState>();
 
   // ── Search & Filter state ──
   bool _showSearch = false;
@@ -300,13 +301,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       appBar: AppBar(
         title: Text(tabTitles[_currentIndex]),
         centerTitle: true,
-        leading: _currentIndex != 0
-            ? IconButton(
-                icon: const Icon(Icons.arrow_back_rounded),
-                tooltip: 'Back to Home',
-                onPressed: () => _onTabTapped(0),
-              )
-            : null,
         actions: _currentIndex == 0
             ? [
                 IconButton(
@@ -448,12 +442,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           // Index 2: Categories
           const CategoriesScreen(),
           // Index 3: Recurring
-          const RecurringScreen(),
+          RecurringScreen(key: _recurringKey),
         ],
       ),
-      floatingActionButton: _currentIndex == 0
+      floatingActionButton: (_currentIndex == 0 || _currentIndex == 3)
           ? FloatingActionButton.extended(
-              onPressed: _navigateToAddTransaction,
+              onPressed: _currentIndex == 0
+                  ? _navigateToAddTransaction
+                  : () => _recurringKey.currentState?.showAddEditDialog(null),
               icon: const Icon(Icons.add_rounded, size: 28),
               label: const Text('Add'),
               backgroundColor: colorScheme.primary,
@@ -936,12 +932,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     barTouchData: BarTouchData(
                       enabled: true,
                       touchTooltipData: BarTouchTooltipData(
+                        tooltipBgColor: theme.colorScheme.surfaceContainerHigh,
                         getTooltipItem: (group, groupIndex, rod, rodIndex) {
                           final day = data[group.x];
                           return BarTooltipItem(
                             '${_dayLabels[day.date.weekday - 1]}\n${_currencyFormat.format(day.amount)}',
                             TextStyle(
-                              color: theme.colorScheme.onInverseSurface,
+                              color: theme.colorScheme.onSurface,
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
                             ),

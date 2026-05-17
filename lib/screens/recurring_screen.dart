@@ -52,10 +52,10 @@ class RecurringScreen extends ConsumerStatefulWidget {
   const RecurringScreen({super.key});
 
   @override
-  ConsumerState<RecurringScreen> createState() => _RecurringScreenState();
+  ConsumerState<RecurringScreen> createState() => RecurringScreenState();
 }
 
-class _RecurringScreenState extends ConsumerState<RecurringScreen> {
+class RecurringScreenState extends ConsumerState<RecurringScreen> {
   // ────────────────────────────────────────────────────────────
   // Toggle active/inactive
   // ────────────────────────────────────────────────────────────
@@ -117,7 +117,7 @@ class _RecurringScreenState extends ConsumerState<RecurringScreen> {
   // Add / Edit dialog
   // ────────────────────────────────────────────────────────────
 
-  Future<void> _showAddEditDialog(RecurringRule? existingRule) async {
+  Future<void> showAddEditDialog(RecurringRule? existingRule) async {
     final isEditing = existingRule != null;
 
     await showModalBottomSheet<void>(
@@ -366,7 +366,7 @@ class _RecurringScreenState extends ConsumerState<RecurringScreen> {
                     icon: Icons.edit_outlined,
                     tooltip: 'Edit',
                     colorScheme: colorScheme,
-                    onTap: () => _showAddEditDialog(rule),
+                    onTap: () => showAddEditDialog(rule),
                   ),
                   const SizedBox(width: 4),
                   _buildSmallIconButton(
