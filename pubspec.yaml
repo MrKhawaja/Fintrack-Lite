@@ -1,0 +1,71 @@
+name: fintrack_lite
+description: A local-first Flutter expense tracker
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.1.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State Management
+  flutter_riverpod: ^2.4.9
+  riverpod_annotation: ^2.3.3
+
+  # Local Storage
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+  # Charts
+  fl_chart: ^0.66.2
+
+  # UI & Icons
+  cupertino_icons: ^1.0.6
+  google_fonts: ^6.1.0
+  flutter_svg: ^2.0.9
+
+  # Utilities
+  intl: ^0.20.2
+  path_provider: ^2.1.1
+  image_picker: ^1.0.7
+  share_plus: ^7.2.1
+  csv: ^6.0.0
+  pdf: ^3.10.7
+  printing: ^5.11.1
+
+  # Security
+  local_auth: ^2.1.8
+  flutter_secure_storage: ^9.0.0
+
+  # Notifications
+  flutter_local_notifications: ^17.0.0
+
+  # Settings
+  shared_preferences: ^2.2.2
+
+  # Routing
+  go_router: ^13.0.1
+
+  # Misc
+  uuid: ^4.3.3
+  collection: ^1.18.0
+  equatable: ^2.0.5
+  json_annotation: ^4.8.1
+  path: ^1.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.7
+  json_serializable: ^6.7.1
+  riverpod_generator: ^2.3.9
+  riverpod_lint: ^2.3.7
+
+flutter:
+  uses-material-design: true
